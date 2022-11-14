@@ -1,8 +1,10 @@
+const playBtn = document.getElementById("btn-play")
 let randomNumberArray = [];
 generateNbrs();
 
 
-document.getElementById("btn-play").addEventListener("click", generateNbrs )
+playBtn.addEventListener("click", generateNbrs);
+document.getElementById("d-numbers").innerHTML = "";
 
 function generateNbrs(){
     while(randomNumberArray.length < 5 ) {
@@ -12,6 +14,7 @@ function generateNbrs(){
         
 
     }
+    
     document.getElementById("d-numbers").innerHTML = randomNumberArray;
 
 }
