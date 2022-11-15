@@ -1,6 +1,25 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+:root{
+    --oxford-blue: #0a2342ff;
+    --zomp: #2ca58dff;
+    --eton-blue: #84bc9cff;
+    --baby-powder: #fffdf7ff;
+    --violet-red: #f46197ff;
+}
+body{
+    background-color: var(--oxford-blue)
+
+}
+.bg-btn{
+    background-color: var(--baby-powder);
+
 }
 
+.bg-number{
+    background-color: var(--eton-blue);
+}
+.clock{
+    background-color:var(--violet-red);
+    border-radius: 20px;
+    margin: 3rem 5rem;
+    
+}

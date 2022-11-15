@@ -9,53 +9,49 @@ generateNbrs();
 
 
 playBtn.addEventListener("click", () => {
-    generateNbrs();
+    const nbrsArray = generateNbrs(1, 100, 5 );
+    console.log(nbrsArray);
+    printNbrs(nbrsArray); 
     timerCountdown();
+    
+    setTimeout(function(){
+        const userNbrs = askUserNbrs(nbrsArray);
+        console.log(userNbrs);
+
+    },32000)
    
    
 
 } );
 
-document.getElementById("d-numbers").innerHTML = "";
 
-function generateNbrs(){
-    let randomNumberArray = [];
+
+function generateNbrs(min, max, length){
+    const randomNumberArray = [];
     
-    while(randomNumberArray.length < 5){
+    while(randomNumberArray.length < length){
 
-        randomNumber = Math.floor(Math.random() * 100) + 1;
+        const randomNumber = Math.floor(Math.random() * (max - min +1)) + min;
         
         if(!randomNumberArray.includes(randomNumber)){
-
             randomNumberArray.push(randomNumber);
-            console.log(randomNumberArray);
-            
-
         } 
 
-        document.getElementById("d-numbers").innerHTML = `<span> ${randomNumberArray} </span>`;
+       
     }
-   
+
+    return randomNumberArray; 
 }
 
-/*document.getElementById("d-numbers").innerHTML = "";
-
-function generateNbrs(){
-    
-    while(randomNumberArray.length < 5 ) {
-
-        let randomNumber = Math.floor(Math.random() * 100 ) +1;
-
-        if(randomNumberArray.indexOf(randomNumber)=== -1)randomNumberArray.push(randomNumber); 
-        console.log(randomNumber);
-        
-
-    } 
- 
-    document.getElementById("d-numbers").innerHTML = randomNumberArray;
-   
-
-}*/
+function printNbrs (displayNbrsArray) {
+    displayNbrs.innerHTML = "";
+    for (let i = 0 ; i < displayNbrsArray.length; i++){
+        const number = displayNbrsArray[i];
+        const numberEl = document.createElement("div");
+        numberEl.innerHTML = `<div class="m-3 p-5 card bg-number text-white">${number}</div> `;
+        displayNbrs.append(numberEl);
+    }
+}
 
 // 30 secondi di tempo
 function timerCountdown(){
@@ -66,14 +62,14 @@ function timerCountdown(){
 
             for (let i = 30; i > 0 ; i--) {
             
-                displayTimer.innerHTML = `${timer}`;
+                displayTimer.innerHTML = `<div class="text-white">${timer}</div>`;
                 timer--;
                 return;
             }
 
         }else{
-            displayTimer.innerHTML = `Time's up!`
-            document.getElementById("d-numbers").innerHTML = "";
+            displayTimer.innerHTML = `<div class="text-white">Time's up!</div>`;
+            displayNbrs.innerHTML = "";
         }
 
     }, 1000)
@@ -81,5 +77,27 @@ function timerCountdown(){
     setTimeout(function(){
         clearInterval(timerInt); 
     }, 32000);
+
+    
+
+}
+
+function askUserNbrs(nbrsArray){
+    const userNbrsArray = [];
+    const wrongNbrs = [];
+
+    for (let i = 0; i < 5 ; i++ ) {
+        const userNbrs = parseInt(prompt("Inserisci numero"));
+
+        if (!userNbrsArray.includes(userNbrs) && nbrsArray.includes(userNbrs)){
+            userNbrsArray.push(userNbrs);
+        } else {
+            wrongNbrs.push(userNbrs);
+        }
+
+    }
+   
+    
+    return userNbrsArray;
 
 }
